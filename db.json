@@ -1,0 +1,16 @@
+{
+  "notes": [
+    {
+      "title": "First Note",
+      "content": "This is the first content is store in the database.",
+      "created_at": "4/26/2023",
+      "id": 1
+    },
+    {
+      "title": "First note",
+      "content": "This is my first note \n",
+      "created_at": "4/26/2023",
+      "id": 2
+    }
+  ]
+}
