@@ -1,8 +1,8 @@
 import "./index.css";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "./store";
-import { App } from "App";
+import { persistor, store } from "./store";
+import { ProtectedApp } from "App";
 import { StrictMode } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NoteCreate } from "pages/NoteCreate/NoteCreate";
@@ -11,24 +11,28 @@ import { NoteBrowse } from "pages/NoteBrosws/NoteBrowse";
 import { PageNotFound } from "pages/PageNotFound/PageNotFound";
 import { Signin } from "pages/Signin/Signin";
 import { Signup } from "pages/Signup/Signup";
-
+import { FirebaseApp } from "utills/firebase";
+import { PersistGate } from "redux-persist/integration/react";
+FirebaseApp.init();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/" element={<App />}>
-            <Route path="/" element={<NoteBrowse />} />
-            <Route path="/notes/:noteId" element={<Note />} />
-            <Route path="/notes/new" element={<NoteCreate />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <PersistGate persistor={persistor}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<ProtectedApp />}>
+              <Route path="/" element={<NoteBrowse />} />
+              <Route path="/notes/:noteId" element={<Note />} />
+              <Route path="/notes/new" element={<NoteCreate />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </StrictMode>
 );

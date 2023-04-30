@@ -7,12 +7,6 @@ export function SearchBar({ onTextChange, placeholder }) {
     <>
       <SearchIcon size={25} className={s.icon} />
       <Input onTextChange={onTextChange} placeholder={placeholder} />
-      <input
-        type="text"
-        className={s.input}
-        onChange={(e) => onTextChange(e.target.value)}
-        placeholder={placeholder}
-      />
     </>
   );
 }

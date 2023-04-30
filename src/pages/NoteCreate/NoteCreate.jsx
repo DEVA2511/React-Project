@@ -1,5 +1,6 @@
 import { NoteAPI } from "api/note-api";
 import { NoteForm } from "components/NoteForm/NoteForm";
+import { withAuthRequired } from "hoc/withAuthRequired";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addNote } from "store/notes/note-slice";
@@ -24,3 +25,4 @@ export function NoteCreate(props) {
     </>
   );
 }
+const ProtectedNoteCreate = withAuthRequired(NoteCreate);
